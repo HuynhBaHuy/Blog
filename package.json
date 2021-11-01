@@ -7,7 +7,8 @@
     "beautiful": "lint-staged",
     "start": "nodemon --inspect src/index.js",
     "watch": "sass --watch src/resources/scss:src/public/css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -33,13 +34,13 @@
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --no-bracket-spacing --bracket-same-line --arrow-parens always --insert-pragma --write"
   },
-  "husky":{
+  "husky": {
     "hooks": {
-      "pre-commit":"lint-staged"
+      "pre-commit": "lint-staged"
     }
   },
   "devDependencies": {
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "lint-staged": "^11.2.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.14",

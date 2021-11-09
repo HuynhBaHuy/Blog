@@ -29,7 +29,9 @@
   "homepage": "https://github.com/HuynhBaHuy/nodejs_blog#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.4"
+    "express-handlebars": "^5.3.4",
+    "mongoose": "^6.0.12",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --no-bracket-spacing --bracket-same-line --arrow-parens always --insert-pragma --write"

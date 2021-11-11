@@ -18,6 +18,15 @@ class CourseController {
         res.render('courses/create');
     }
 
+    //[GET] /course/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then((course) => {
+                res.render('courses/edit', {course: mongooseToObject(course)});
+            })
+            .catch(next);
+    }
+
     //[POST] /course/store
     store(req, res, next) {
         const formData = req.body;
@@ -27,6 +36,15 @@ class CourseController {
             .save()
             .then(() => res.redirect('/')) // redirect to detail screen
             .catch((error) => {});
+    }
+
+    //[PUT] /course/:id/update
+    update(req, res, next) {
+        const formData = req.body;
+        formData.image = `https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg`;
+        Course.updateOne({_id: req.params.id}, formData)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
     }
 }
 

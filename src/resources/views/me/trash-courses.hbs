@@ -3,7 +3,7 @@
         <a href="/me/stored/courses">Go back course list</a>
         <h3>Removed Courses</h3>
     </div>
-    
+
 
     <table class="table mt-4">
         <thead>
@@ -19,7 +19,7 @@
         <tbody>
             {{#each deletedCourse}}
             <tr>
-                
+
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.level}}</td>
@@ -66,33 +66,30 @@
 {{!-- hidden form to submit restore method --}}
 <form name="restore-course-form" method="POST" action=""></form>
 <script>
-    
-    let courseId;
-    const btnRestoreAll = document.querySelectorAll('.btn-restore');
-    const deleteForm = document.forms['delete-course-form'];
-    const restoreForm = document.forms['restore-course-form'];
-    const btnDeleteCourse = document.getElementById('btn-delete-course');
-    // when dialog is showed
-    const deleteModal = document.getElementById('delete-course-modal');
-    deleteModal.addEventListener('show.bs.modal', function (event) {
-        const delBtn = event.relatedTarget;
-        courseId = delBtn.getAttribute('data-id');
-    })
-    // when delete button is clicked
-    btnDeleteCourse.onclick = function () {
-        deleteForm.action = '/courses' + '/' + courseId + '/force?_method=DELETE'
-        deleteForm.submit();
-    };
+    document.addEventListener("DOMContentLoaded", function () {
+        let courseId;
+        const btnRestoreAll = $('.btn-restore');
+        const deleteForm = document.forms['delete-course-form'];
+        const restoreForm = document.forms['restore-course-form'];
+        const btnDeleteCourse = $('#btn-delete-course');
+        // when dialog is showed
+        const deleteModal = document.getElementById('delete-course-modal');
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            const delBtn = event.relatedTarget;
+            courseId = delBtn.getAttribute('data-id');
+        })
+        // when delete button is clicked
+        btnDeleteCourse.click(function (event) {
+            deleteForm.action = '/courses' + '/' + courseId + '/force?_method=DELETE'
+            deleteForm.submit();
+        });
 
-    // when restore btn is clicked
-    btnRestoreAll.forEach((restoreBtn) => {
-        restoreBtn.addEventListener('click', (event) => {
+        // when restore btn is clicked
+        btnRestoreAll.click(function (event) {
             event.preventDefault();
-            const courseID = restoreBtn.getAttribute('data-id');
-            console.log(courseID);
-            restoreForm.action = '/courses' + '/' + courseID + '/restore?_method=PATCH'
-            restoreForm.submit();
 
+            restoreForm.action = '/courses' + '/' + $(this).data('id') + '/restore?_method=PATCH'
+            restoreForm.submit();
         })
     })
 </script>
